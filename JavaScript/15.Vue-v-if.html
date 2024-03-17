@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Learning Vue</title>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+</head>
+<body>
+    <div id="app">
+        <h1>{{title}}</h1>
+        <button @click="toggleShowMsg">
+            <span v-if="showMsg">Hide Message</span>
+            <!-- <span v-if="!showMsg">Show Message</span> -->
+
+            <!-- v-else -->
+            <span v-else>Show Message</span>
+        </button>
+
+        <!-- v-if deletes/adds element,more expensive -->
+        <div v-if="showMsg">
+            <p>you cant see me</p>
+        </div>
+        <!-- v-show changes css style display -->
+        <div v-show="showMsg">
+            <p>you cant see me</p>
+        </div>
+    </div>
+</body>
+
+<script>
+
+    const { createApp } = Vue
+
+    createApp({
+        data() {
+            return {
+                title: 'Hello Vue!',
+                showMsg : false
+            }
+        },
+        methods: {
+            toggleShowMsg (){
+                this.showMsg = !this.showMsg
+            }
+        }
+    }).mount('#app')
+</script>
+</html>

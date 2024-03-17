@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cat or Dog</title>
+    <style>
+        #container{
+            width: 65%;
+            margin: 0 auto;
+        }
+        #img{
+            display: block;
+            margin: 0 auto;
+            width: 300px;
+            height: 300px;
+        }
+        .hidden{
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div id="container">
+        <!-- When Pressing dog/cat button, change dog/cat image -->
+        <h3 id="title">Are you a CAT person？</h3>
+        <input type="button" value="yes" id="yes">
+        <input type="button" value="no" id="no">
+        <br><br>
+        <img src="img/cat.png" alt="cat" id="img">
+        
+        <div class="hidden">
+            <!-- Input pet name -->
+            <br><br>
+            <label for="name">Pet name: </label>
+            <input type="text" id="name" value="Tom">
+            <br><br>
+            <!-- Select Favorite Activities -->
+            <h5 for="activities">Select Favorite Activities: </h5>
+            <fieldset id="activities">
+                <input type="checkbox" name="activity" id="play"> Play
+                <input type="checkbox" name="activity" id="explore"> Explore
+                <input type="checkbox" name="activity" id="sleep">Sleep
+            </fieldset>
+            <br>
+            <input type="button" value="Select All" id="all">
+            <input type="button" value="Select None" id="none">
+            <input type="button" value="Select Reverse" id="reverse">
+            <br><br>
+
+            <!-- Adopt -->
+            <input type="button" value="Adopt" id="adopt">
+        </div>
+    </div>
+
+    <!-- JS -->
+    <script>
+        // when no is clicked, switch animal
+        document.getElementById('no').onclick = function (){
+            alert("no clicked")
+            if(document.getElementById('img').alt == "cat"){
+                document.getElementById('img').src = "img/dog.png"
+                document.getElementById('title').innerText= 'Are you a DOG person？'
+                document.getElementById('img').alt = "dog"
+            }else {
+                document.getElementById('img').src = "img/cat.png"
+                document.getElementById('title').innerText= 'Are you a CAT person？'
+                document.getElementById('img').alt = "cat"
+            }
+        }
+
+        // when yes is clicked, show the adoption form
+        document.getElementById('yes').onclick = function (){
+            var hidden = document.getElementsByClassName('hidden')
+            for(let i =0;i <hidden.length; i++){
+                hidden[0].style.display = 'block'
+            }
+        }
+
+        // text area show lower case on focus, upper case on blur
+        document.getElementById('name').onfocus = function(){
+            let input = document.getElementById("name")
+            input.value = input.value.toLowerCase();
+        }
+
+        document.getElementById('name').onblur = function(){
+            let input = document.getElementById("name");
+            input.value = input.value.toUpperCase(); 
+        }
+
+        // Select all / select none
+        document.getElementById('all').onclick = function(){
+            var checkboxes = document.getElementsByName('activity');
+            for(let i =0;i <checkboxes.length; i++){
+                checkboxes[i].checked = true;
+            }
+        }
+
+        document.getElementById('none').onclick = function(){
+            var checkboxes = document.getElementsByName('activity');
+            for(let i =0;i <checkboxes.length; i++){
+                checkboxes[i].checked = false;
+            }
+        }
+
+        document.getElementById('reverse').onclick = function(){
+            var checkboxes = document.getElementsByName('activity');
+            for(let i =0;i <checkboxes.length; i++){
+                checkboxes[i].checked = !checkboxes[i].checked;
+            }
+        }
+
+        // show a message on click
+        document.getElementById('adopt').onclick = function (){
+            let msg = 'Congratulation! You adopted ' + document.getElementById('name').value + '.'
+            alert(msg)
+        }
+
+    </script>
+</html>

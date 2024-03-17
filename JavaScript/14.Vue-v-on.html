@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Learning Vue</title>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+</head>
+<body>
+    <div id="app">
+        {{title}}
+        <br>
+        <input type="button" value="Click me" v-on:click="handle()" id="">
+        <br>
+        <button @click="changeTitle('new title')">New Title</button>
+    </div>
+</body>
+
+<script>
+
+    const { createApp } = Vue
+
+    createApp({
+        data() {
+            return {
+                title: 'Hello Vue!'
+            }
+        },
+        methods: {
+            handle(){
+                // alert('Clicked');
+                this.title = "You learned about events!"
+            },
+            // on click event with parameter
+            changeTitle(title){
+                this.title = title
+            }
+        }
+    }).mount('#app')
+</script>
+</html>

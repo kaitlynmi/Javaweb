@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Learning Vue</title>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <style>
+        .box{
+            padding: 100px 0;
+            width: 400px;
+            text-align: center;
+            background: #ddd;
+            margin: 20px;
+            display: inline-block;
+        }
+    </style>
+</head>
+<body>
+    <div id="app">
+        <h1>{{title}}</h1>
+
+        <br>
+        <!-- mouse events -->
+        <!-- <div class="box"></div> -->
+        <!-- $event explicitly pass in the event element -->
+        <div class="box" v-on:mouseover="handleEvent($event,'msg')">mouseover</div>
+        <div class="box" @mouseleave="handleEvent" >mouseleave</div>
+        <div class="box" @dblclick="handleEvent">dblclick</div>
+        <div class="box" @mousemove="handleMousemove">mousemove - {{x}} {{y}}</div>
+
+    </div>
+</body>
+
+<script>
+
+    const { createApp } = Vue
+
+    createApp({
+        data() {
+            return {
+                title: 'Hello Vue!',
+                x:0,
+                y:0,
+
+            }
+        },
+        methods: {
+            // event itself is automatically passed in as first argument
+            // event has useful properties like altKey, ctrlKey, offsetX, type ...
+            handleEvent(e,data) {
+                console.log(e, e.type)
+                // if data exists
+                if (data){
+                    console.log(data)
+                }
+            },
+            
+            handleMousemove(e){
+                this.x = e.offsetX
+                this.y = e.offsetY
+            }
+        }
+    }).mount('#app')
+</script>
+</html>
